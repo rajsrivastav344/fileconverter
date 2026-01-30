@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Universal File Converter</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+</head>
+<body>
+<div class="theme-toggle">
+    <button id="darkModeBtn">🌙 Toggle Dark Mode</button>
+</div>
+
+<div class="container">
+    <h2>Universal File Converter</h2>
+
+    <form id="uploadForm" method="post" enctype="multipart/form-data">
+        <div class="drop-zone" id="dropZone">
+            <p>Drag & Drop your file here or click to upload</p>
+            <input type="file" name="file" id="fileInput" required>
+        </div>
+
+        <select name="format" id="formatSelect" required>
+            <option value="">Select Format</option>
+            <option value="mp3" data-type="audio">MP3</option>
+            <option value="wav" data-type="audio">WAV</option>
+            <option value="flac" data-type="audio">FLAC</option>
+
+            <option value="mp4" data-type="video">MP4</option>
+            <option value="mkv" data-type="video">MKV</option>
+            <option value="avi" data-type="video">AVI</option>
+
+            <option value="jpg" data-type="image">JPG</option>
+            <option value="png" data-type="image">PNG</option>
+            <option value="webp" data-type="image">WEBP</option>
+
+            <option value="pdf" data-type="document">PDF</option>
+            <option value="docx" data-type="document">DOCX</option>
+            <option value="pptx" data-type="document">PPTX</option>
+        </select>
+
+        <button type="submit">Convert File</button>
+    </form>
+
+    <div class="progress-container" id="progressContainer">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</div>
+
+<!-- Spinner Overlay -->
+<div class="spinner-overlay" id="spinnerOverlay">
+    <div class="spinner"></div>
+    <p>Converting...</p>
+</div>
+
+<script>
+// ===== Drag & Drop =====
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+
+dropZone.addEventListener("click", () => fileInput.click());
+
+dropZone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZone.classList.add("dragover");
+});
+
+dropZone.addEventListener("dragleave", () => {
+    dropZone.classList.remove("dragover");
+});
+
+dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("dragover");
+    fileInput.files = e.dataTransfer.files;
+    updateFormatDropdown();
+});
+
+// ===== File-Type-Based Format Dropdown =====
+const formatSelect = document.getElementById("formatSelect");
+
+fileInput.addEventListener("change", updateFormatDropdown);
+
+function updateFormatDropdown() {
+    const file = fileInput.files[0];
+    if (!file) return;
+    const ext = file.name.split(".").pop().toLowerCase();
+
+    let type = "";
+    if (["mp3","wav","flac","aac","ogg"].includes(ext)) type = "audio";
+    else if (["mp4","mkv","avi","webm","mov","flv"].includes(ext)) type = "video";
+    else if (["jpg","jpeg","png","webp","bmp","tiff","ico"].includes(ext)) type = "image";
+    else if (["doc","docx","ppt","pptx","xls","xlsx","odt","ods","odp","pdf"].includes(ext)) type = "document";
+
+    for (const option of formatSelect.options) {
+        if (!option.value) continue;
+        option.style.display = option.dataset.type === type ? "block" : "none";
+    }
+    formatSelect.value = "";
+}
+
+// ===== Loading Spinner + Fake Progress =====
+const uploadForm = document.getElementById("uploadForm");
+const spinnerOverlay = document.getElementById("spinnerOverlay");
+const progressBar = document.getElementById("progressBar");
+const progressContainer = document.getElementById("progressContainer");
+
+uploadForm.addEventListener("submit", (e) => {
+    spinnerOverlay.style.display = "flex";
+    progressContainer.style.display = "block";
+
+    let width = 0;
+    const interval = setInterval(() => {
+        if (width >= 90) { clearInterval(interval); return; }
+        width += 1;
+        progressBar.style.width = width + "%";
+    }, 50);
+});
+
+// ===== Dark Mode Toggle =====
+const darkModeBtn = document.getElementById("darkModeBtn");
+darkModeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});
+</script>
+<footer>
+    <p>Made with ❤️ by Raj Srivastav</p>
+    <div class="footer-icons">
+        <a href="https://github.com/rajsrivastav344" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/rajsrivastav" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com/yourusername" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:lchhotulala@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+</footer>
+
+</body>
+</html>

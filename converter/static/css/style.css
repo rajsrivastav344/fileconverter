@@ -1,0 +1,180 @@
+:root {
+    --bg-gradient: linear-gradient(135deg, #667eea, #764ba2);
+    --card-bg: white;
+    --text-color: #333;
+    --button-bg: linear-gradient(135deg, #667eea, #764ba2);
+    --button-text: white;
+}
+
+body {
+    font-family: "Segoe UI", sans-serif;
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    animation: bgMove 8s infinite alternate;
+}
+
+body.dark-mode {
+    --bg-gradient: linear-gradient(135deg, #222, #555);
+    --card-bg: #333;
+    --text-color: #eee;
+    --button-bg: #555;
+    --button-text: #fff;
+}
+
+@keyframes bgMove {
+    0% { background-position: left; }
+    100% { background-position: right; }
+}
+
+.container {
+    background: var(--card-bg);
+    padding: 35px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    animation: slideUp 0.8s ease;
+    color: var(--text-color);
+    text-align: center;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.drop-zone {
+    border: 2px dashed #ccc;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.drop-zone.dragover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--button-bg);
+    color: var(--button-text);
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.success a {
+    display: block;
+    margin-top: 15px;
+    color: var(--text-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.spinner-overlay {
+    display: none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 999;
+    color: white;
+    font-size: 20px;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #667eea;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.progress-container {
+    width: 100%;
+    background: #eee;
+    border-radius: 10px;
+    height: 10px;
+    display: none;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background: #667eea;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+footer {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+footer .footer-icons {
+    margin-top: 10px;
+}
+
+footer .footer-icons a {
+    margin: 0 10px;
+    color: var(--text-color); /* ensures visibility in both light/dark */
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+footer .footer-icons a:hover {
+    color: #667eea; /* nice hover color */
+    transform: scale(1.2);
+}
+footer .footer-icons i {
+    font-size: 25px;
+    color: #667eea; /* visible on both light and dark */
+}

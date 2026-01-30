@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Converted File</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-papq0L0Xr2K4GJzDxhq5pEQ/i7Kj7sG3U+Oo1X6Cj3Xn27HX6wqFw6M0kKXp/3Tw+dZ4i3+fF09aCg6j5c98lw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+<div class="container success">
+    <h2>✅ Conversion Successful</h2>
+    <a href="{{ url_for('download', filename=file) }}">Download Converted File</a>
+    <a href="{{ url_for('index') }}">Convert Another File</a>
+</div>
+<footer>
+    <p>Made with ❤️ by Your Name</p>
+    <div class="footer-icons">
+        <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com/yourusername" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:youremail@example.com"><i class="fas fa-envelope"></i></a>
+    </div>
+</footer>
+
+</body>
+</html>
