@@ -25,7 +25,7 @@ A simple and efficient **File Converter Web Application** built using **Flask** 
 ## 📸 Home Page Screenshot
 
 <p align="center">
-  <img src="./screenshot/home.png" width="850"/>
+  <img src="./converter/screenshot/home.png" width="850"/>
 </p>
 
 ---
